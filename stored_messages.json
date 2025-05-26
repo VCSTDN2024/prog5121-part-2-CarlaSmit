@@ -1,7 +1,15 @@
+[
 {
   "messageID": "6923334186",
   "messageHash": "69:23:TESTINGMESSAGE",
   "recipient": "+123456789",
   "messageContent": "Testing my damn message",
   "timestamp": "2025-05-26 14:18:40"
+},{
+  "messageID": "0085366684",
+  "messageHash": "00:21:TESTINGMESSAGE",
+  "recipient": "+215463987",
+  "messageContent": "Testing saved message",
+  "timestamp": "2025-05-26 17:52:44"
 }
+]
