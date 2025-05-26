@@ -26,7 +26,7 @@ public class Main {
         String registrationResult = loginSys.registerUser(username, password, phoneNumber, firstName, lastName);
         System.out.println(registrationResult);
 
-        if (registrationResult.equals("User registered successfully.")) {
+        if (registrationResult.equals("The two above conditions have been met, and the user has been registered successfully.")) {
             System.out.println("\n=== Login ===");
             System.out.print("Enter username: ");
             String loginUsername = scanner.nextLine();
@@ -34,7 +34,8 @@ public class Main {
             System.out.print("Enter password: ");
             String loginPassword = scanner.nextLine();
 
-            String loginMessage = loginSys.loginUser(loginUsername, loginPassword);
+            boolean loginSuccess = loginSys.loginUser(loginUsername, loginPassword);
+            String loginMessage = loginSys.returnLoginStatus(loginSuccess);
             System.out.println(loginMessage);
         }
 
