@@ -1,5 +1,7 @@
 package com.example;
-
+//main just for tesdting purposes
+//im using QuickChatApp.java as the main class to run the application
+//ST10477400 Carla Smit
 import java.util.Scanner;
 
 public class Main {
@@ -41,4 +43,5 @@ public class Main {
 
         scanner.close();
     }
+    //ST10477400 Carla Smit
 }

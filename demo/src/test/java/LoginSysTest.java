@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
+//ST10477400 Carla Smit
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.example.LoginSys;
@@ -9,7 +10,7 @@ public class LoginSysTest {
 
     @BeforeEach
     public void setUp() {
-        loginSys = new LoginSys();
+        loginSys = new LoginSys();//this method is called before each test to set up the LoginSys instance
     }
 
     @Test
@@ -54,7 +55,7 @@ public class LoginSysTest {
         assertFalse(loginSys.loginUser("user_", "WrongPass1!"));
     }
 
-    // Additional tests for thorough coverage
+    //Additional tests for thorough coverage
 
     @Test
     public void testEmptyUsername() {

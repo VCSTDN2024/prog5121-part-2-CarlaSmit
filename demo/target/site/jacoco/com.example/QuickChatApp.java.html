@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QuickChatApp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">QuickChatApp.java</span></div><h1>QuickChatApp.java</h1><pre class="source lang-java linenums">package com.example;
-
+//ST10477400 Carla Smit
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -11,21 +11,21 @@ import javax.swing.JOptionPane;
     
     
     public static void main(String[] args) {
-        // Add this to the main method at the very beginning
+        //Force GUI to run in non-headless mode
 <span class="nc" id="L15">    System.setProperty(&quot;java.awt.headless&quot;, &quot;false&quot;);</span>
 
 <span class="nc" id="L17">        System.out.println(&quot;=== QuickChat Application ===&quot;);</span>
-<span class="nc" id="L18">        testGUI();</span>
-        // Step 1: User login
+<span class="nc" id="L18">        testGUI();//test the GUI so just say ok</span>
+        //Step 1: User login
 <span class="nc bnc" id="L20" title="All 2 branches missed.">        if (!login()) {</span>
 <span class="nc" id="L21">            System.out.println(&quot;Login failed. Exiting application.&quot;);</span>
 <span class="nc" id="L22">            return;</span>
         }
         
-        // Step 2: Get number of messages user wants to send
+        //Step 2: Get number of messages user wants to send
 <span class="nc" id="L26">        maxMessages = getMessageCount();</span>
         
-        // Step 3: Main application loop
+        //Step 3: Main application loop
 <span class="nc" id="L29">        runApplication();</span>
         
 <span class="nc" id="L31">        scanner.close();</span>
@@ -40,7 +40,7 @@ import javax.swing.JOptionPane;
 <span class="nc" id="L40">            System.out.print(&quot;Enter password: &quot;);</span>
 <span class="nc" id="L41">            String password = scanner.nextLine().trim();</span>
             
-            // Simple authentication (you can enhance this)
+            //Simple authentication (you can enhance this)
 <span class="nc bnc" id="L44" title="All 4 branches missed.">            if (!username.isEmpty() &amp;&amp; !password.isEmpty()) {</span>
 <span class="nc" id="L45">                currentUser = username;</span>
 <span class="nc" id="L46">                System.out.println(&quot;Login successful! Welcome, &quot; + username + &quot;!&quot;);</span>
@@ -54,7 +54,7 @@ import javax.swing.JOptionPane;
     }
     
     private static int getMessageCount() {
-<span class="nc" id="L57">        while (true) {</span>
+<span class="nc" id="L57">        while (true) {//this loop will continue until a valid number is entered</span>
             try {
 <span class="nc" id="L59">                System.out.print(&quot;How many messages would you like to send? &quot;);</span>
 <span class="nc" id="L60">                int count = Integer.parseInt(scanner.nextLine().trim());</span>
@@ -90,7 +90,7 @@ import javax.swing.JOptionPane;
         }
     }
     
-    private static void displayMenu() {
+    private static void displayMenu() {//this displays the main menu
 <span class="nc" id="L94">        System.out.println(&quot;\n=== Welcome to QuickChat ===&quot;);</span>
 <span class="nc" id="L95">        System.out.println(&quot;Please choose an option:&quot;);</span>
 <span class="nc" id="L96">        System.out.println(&quot;1. Send Messages&quot;);</span>
@@ -106,23 +106,23 @@ import javax.swing.JOptionPane;
 <span class="nc bnc" id="L106" title="All 2 branches missed.">        for (int i = 0; i &lt; maxMessages; i++) {</span>
 <span class="nc" id="L107">            System.out.println(&quot;\n--- Message &quot; + (i + 1) + &quot; of &quot; + maxMessages + &quot; ---&quot;);</span>
             
-            // Get recipient with validation
+            //Get recipient with validation
 <span class="nc" id="L110">            String recipient = getValidRecipient();</span>
             
-            // Get message content with validation
+            //Get message content with validation
 <span class="nc" id="L113">            String messageContent = getValidMessage();</span>
             
-            // Create message object
+            //Create message object
 <span class="nc" id="L116">            Message message = new Message(recipient, messageContent);</span>
             
-            // Display message details
+            //Display message details
 <span class="nc" id="L119">            displayMessageDetails(message);</span>
             
-            // Handle message sending/storing/discarding
+            //Handle message sending/storing/discarding
 <span class="nc" id="L122">            String result = message.SentMessage();</span>
 <span class="nc" id="L123">            System.out.println(result);</span>
             
-            // Ask if user wants to continue
+            //Ask if user wants to continue
 <span class="nc bnc" id="L126" title="All 2 branches missed.">            if (i &lt; maxMessages - 1) {</span>
 <span class="nc" id="L127">                System.out.print(&quot;Continue sending messages? (y/n): &quot;);</span>
 <span class="nc" id="L128">                String continueChoice = scanner.nextLine().trim().toLowerCase();</span>
@@ -132,7 +132,7 @@ import javax.swing.JOptionPane;
             }
         }
         
-        // Display total messages sent
+        //Display total messages sent
 <span class="nc" id="L136">        System.out.println(&quot;\nTotal messages processed: &quot; + Message.returnTotalMessages());</span>
 <span class="nc" id="L137">    }</span>
     
@@ -141,7 +141,7 @@ import javax.swing.JOptionPane;
 <span class="nc" id="L141">            System.out.print(&quot;Enter recipient number (with international code, max 10 chars): &quot;);</span>
 <span class="nc" id="L142">            String recipient = scanner.nextLine().trim();</span>
             
-            // Create temporary message to test validation
+            //Create temporary message to test validation
 <span class="nc" id="L145">            Message tempMessage = new Message(recipient, &quot;test&quot;);</span>
 <span class="nc bnc" id="L146" title="All 2 branches missed.">            if (tempMessage.checkRecipientCell() == 1) {</span>
 <span class="nc" id="L147">                System.out.println(&quot;Cell phone number successfully captured.&quot;);</span>
@@ -153,7 +153,7 @@ import javax.swing.JOptionPane;
     }
     
     private static String getValidMessage() {
-        while (true) {
+        while (true) {//this loop will continue until a valid message is entered
 <span class="nc" id="L157">            System.out.print(&quot;Enter your message (max 250 characters): &quot;);</span>
 <span class="nc" id="L158">            String message = scanner.nextLine().trim();</span>
             
@@ -170,7 +170,7 @@ import javax.swing.JOptionPane;
         }
     }
     
-    private static void displayMessageDetails(Message message) {
+    private static void displayMessageDetails(Message message) {//this displays the message details
 <span class="nc" id="L174">        System.out.println(&quot;\n=== Message Details ===&quot;);</span>
 <span class="nc" id="L175">        System.out.println(&quot;Message ID: &quot; + message.getMessageID());</span>
 <span class="nc" id="L176">        System.out.println(&quot;Message Hash: &quot; + message.getMessageHash());</span>
@@ -178,16 +178,16 @@ import javax.swing.JOptionPane;
 <span class="nc" id="L178">        System.out.println(&quot;Message: &quot; + message.getMessageContent());</span>
 <span class="nc" id="L179">    }</span>
     
-    private static void showRecentMessages() {
+    private static void showRecentMessages() {//this shows the recent messages
 <span class="nc" id="L182">        System.out.println(&quot;\n=== Recent Messages ===&quot;);</span>
 <span class="nc" id="L183">        System.out.println(&quot;Coming Soon.&quot;);</span>
 <span class="nc" id="L184">        System.out.print(&quot;Press Enter to continue...&quot;);</span>
 <span class="nc" id="L185">        scanner.nextLine();</span>
 <span class="nc" id="L186">    }</span>
     public static void testGUI() {
-<span class="nc" id="L188">    JOptionPane.showMessageDialog(null, &quot;GUI Test - Can you see this?&quot;);</span>
+<span class="nc" id="L188">    JOptionPane.showMessageDialog(null, &quot;GUI Test - Can you see this?&quot;);//this tests the GUI to see if it works</span>
 <span class="nc" id="L189">}</span>
-}
+}//ST10477400 Carla Smit
 
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

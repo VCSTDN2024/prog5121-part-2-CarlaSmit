@@ -1,5 +1,5 @@
 package com.example;
-
+//ST10477400 Carla Smit
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -11,21 +11,21 @@ public class QuickChatApp {
     
     
     public static void main(String[] args) {
-        // Add this to the main method at the very beginning
+        //Force GUI to run in non-headless mode
     System.setProperty("java.awt.headless", "false");
 
         System.out.println("=== QuickChat Application ===");
-        testGUI();
-        // Step 1: User login
+        testGUI();//test the GUI so just say ok
+        //Step 1: User login
         if (!login()) {
             System.out.println("Login failed. Exiting application.");
             return;
         }
         
-        // Step 2: Get number of messages user wants to send
+        //Step 2: Get number of messages user wants to send
         maxMessages = getMessageCount();
         
-        // Step 3: Main application loop
+        //Step 3: Main application loop
         runApplication();
         
         scanner.close();
@@ -40,7 +40,7 @@ public class QuickChatApp {
             System.out.print("Enter password: ");
             String password = scanner.nextLine().trim();
             
-            // Simple authentication (you can enhance this)
+            //Simple authentication (you can enhance this)
             if (!username.isEmpty() && !password.isEmpty()) {
                 currentUser = username;
                 System.out.println("Login successful! Welcome, " + username + "!");
@@ -54,7 +54,7 @@ public class QuickChatApp {
     }
     
     private static int getMessageCount() {
-        while (true) {
+        while (true) {//this loop will continue until a valid number is entered
             try {
                 System.out.print("How many messages would you like to send? ");
                 int count = Integer.parseInt(scanner.nextLine().trim());
@@ -90,7 +90,7 @@ public class QuickChatApp {
         }
     }
     
-    private static void displayMenu() {
+    private static void displayMenu() {//this displays the main menu
         System.out.println("\n=== Welcome to QuickChat ===");
         System.out.println("Please choose an option:");
         System.out.println("1. Send Messages");
@@ -106,23 +106,23 @@ public class QuickChatApp {
         for (int i = 0; i < maxMessages; i++) {
             System.out.println("\n--- Message " + (i + 1) + " of " + maxMessages + " ---");
             
-            // Get recipient with validation
+            //Get recipient with validation
             String recipient = getValidRecipient();
             
-            // Get message content with validation
+            //Get message content with validation
             String messageContent = getValidMessage();
             
-            // Create message object
+            //Create message object
             Message message = new Message(recipient, messageContent);
             
-            // Display message details
+            //Display message details
             displayMessageDetails(message);
             
-            // Handle message sending/storing/discarding
+            //Handle message sending/storing/discarding
             String result = message.SentMessage();
             System.out.println(result);
             
-            // Ask if user wants to continue
+            //Ask if user wants to continue
             if (i < maxMessages - 1) {
                 System.out.print("Continue sending messages? (y/n): ");
                 String continueChoice = scanner.nextLine().trim().toLowerCase();
@@ -132,7 +132,7 @@ public class QuickChatApp {
             }
         }
         
-        // Display total messages sent
+        //Display total messages sent
         System.out.println("\nTotal messages processed: " + Message.returnTotalMessages());
     }
     
@@ -141,7 +141,7 @@ public class QuickChatApp {
             System.out.print("Enter recipient number (with international code, max 10 chars): ");
             String recipient = scanner.nextLine().trim();
             
-            // Create temporary message to test validation
+            //Create temporary message to test validation
             Message tempMessage = new Message(recipient, "test");
             if (tempMessage.checkRecipientCell() == 1) {
                 System.out.println("Cell phone number successfully captured.");
@@ -153,7 +153,7 @@ public class QuickChatApp {
     }
     
     private static String getValidMessage() {
-        while (true) {
+        while (true) {//this loop will continue until a valid message is entered
             System.out.print("Enter your message (max 250 characters): ");
             String message = scanner.nextLine().trim();
             
@@ -170,7 +170,7 @@ public class QuickChatApp {
         }
     }
     
-    private static void displayMessageDetails(Message message) {
+    private static void displayMessageDetails(Message message) {//this displays the message details
         System.out.println("\n=== Message Details ===");
         System.out.println("Message ID: " + message.getMessageID());
         System.out.println("Message Hash: " + message.getMessageHash());
@@ -178,15 +178,16 @@ public class QuickChatApp {
         System.out.println("Message: " + message.getMessageContent());
     }
     
-    private static void showRecentMessages() {
+    private static void showRecentMessages() {//this shows the recent messages
         System.out.println("\n=== Recent Messages ===");
         System.out.println("Coming Soon.");
         System.out.print("Press Enter to continue...");
         scanner.nextLine();
     }
+    /*OpenAI, ChatGPT,Help with JSON*/
     public static void testGUI() {
-    JOptionPane.showMessageDialog(null, "GUI Test - Can you see this?");
+    JOptionPane.showMessageDialog(null, "GUI Test - Can you see this?");//this tests the GUI to see if it works
 }
-}
+}//ST10477400 Carla Smit
 
 

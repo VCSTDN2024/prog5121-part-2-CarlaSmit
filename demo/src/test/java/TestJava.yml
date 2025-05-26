@@ -1,6 +1,6 @@
 # GitHub Actions workflow for automated Java testing
 name: Java CI with Maven
-
+#ST10477400 Carla Smit
 on:
   push:
     branches: [ main, master ]
@@ -38,3 +38,4 @@ jobs:
         path: target/surefire-reports/*.xml
         reporter: java-junit
         fail-on-error: true
+        #ST10477400 Carla Smit

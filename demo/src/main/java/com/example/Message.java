@@ -1,4 +1,5 @@
 package com.example;
+//ST10477400 Carla Smit
 import java.util.*;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -14,7 +15,7 @@ public class Message {
     private static int totalMessagesSent = 0;
     private static List<Message> allMessages = new ArrayList<>();
     
-    // Constructor
+    //Constructor
     public Message(String recipient, String messageContent) {
         this.recipient = recipient;
         this.messageContent = messageContent;
@@ -24,7 +25,7 @@ public class Message {
         allMessages.add(this);
     }
     
-    // Generate random 10-digit message ID
+    //Generate random 10-digit message ID
     private String generateMessageID() {
         Random random = new Random();
         StringBuilder id = new StringBuilder();
@@ -34,40 +35,40 @@ public class Message {
         return id.toString();
     }
     
-    // Method: checkMessageID() - ensures message ID is not more than 10 characters
+    //Method: checkMessageID() - ensures message ID is not more than 10 characters
     public boolean checkMessageID() {
         return messageID != null && messageID.length() <= 10;
     }
     
-    // Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
-    // Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
+    //Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
+    //Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
 public int checkRecipientCell() {
     if (recipient == null || recipient.isEmpty()) {
         return 0; // Invalid
     }
     
-    // Check if starts with + (international code)
+    //Check if starts with + (international code)
     if (!recipient.startsWith("+")) {
         return 0; // Invalid
     }
     
-    // Get the number part (without the +)
+    //Get the number part (without the +)
     String numberPart = recipient.substring(1);
     
-    // Check if number part is too long (max 10 digits after +)
+    //Check if number part is too long (max 10 digits after +)
     if (numberPart.length() > 10) {
         return 0; // Invalid
     }
     
-    // Check if the number part contains only digits
+    //Check if the number part contains only digits
     if (!numberPart.matches("\\d+")) {
         return 0; // Invalid
     }
     
-    return 1; // Valid
+    return 1; //Valid
 }
     
-    // Method: createMessageHash() - creates and returns the message hash
+    //Method: createMessageHash() - creates and returns the message hash
     public String createMessageHash() {
         if (messageID == null || messageID.length() < 2 || messageContent == null || messageContent.trim().isEmpty()) {
             return "00:0:INVALID";
@@ -83,7 +84,7 @@ public int checkRecipientCell() {
         return firstTwoDigits + ":" + messageLength + ":" + firstWord + lastWord;
     }
     
-    // Method: SentMessage() - allows user to choose send, store, or disregard
+    //Method: SentMessage() - allows user to choose send, store, or disregard
     public String SentMessage() {
         String[] options = {"Send Message", "Disregard Message", "Store Message"};
         int choice = JOptionPane.showOptionDialog(
@@ -110,7 +111,7 @@ public int checkRecipientCell() {
         }
     }
     
-    // Method: printMessages() - returns list of all messages sent
+    //Method: printMessages() - returns list of all messages sent
     public static String printMessages() {
         if (allMessages.isEmpty()) {
             return "No messages have been sent.";
@@ -130,7 +131,7 @@ public int checkRecipientCell() {
         return result.toString();
     }
     
-    // Method: returnTotalMessages() - returns total number of messages sent
+    //Method: returnTotalMessages() - returns total number of messages sent
     public static int returnTotalMessages() {
         return totalMessagesSent;
     }
@@ -139,13 +140,13 @@ public int checkRecipientCell() {
     allMessages.clear();
 }
     
-    // Method: storeMessage() - stores messages in JSON format
+    //Method: storeMessage() - stores messages in JSON format
     public void storeMessage() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String timestamp = sdf.format(new Date());
             
-            // Create JSON string manually
+            //Create JSON string manually
             StringBuilder json = new StringBuilder();
             json.append("{\n");
             json.append("  \"messageID\": \"").append(escapeJson(this.messageID)).append("\",\n");
@@ -165,7 +166,7 @@ public int checkRecipientCell() {
         }
     }
     
-    // Helper method to escape JSON strings
+    //Helper method to escape JSON strings
     private String escapeJson(String input) {
         if (input == null) return "";
         return input.replace("\\", "\\\\")
@@ -186,6 +187,6 @@ public int checkRecipientCell() {
     public String getMessageContent() {
          return messageContent; 
         }
-    // Method: resetCounters() - resets static counters for testing
-
+    //Method: resetCounters() - resets static counters for testing
+//ST10477400 Carla Smit
 }

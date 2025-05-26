@@ -1,5 +1,5 @@
 package com.example;
-
+//ST10477400 Carla Smit
 public class User {
     private String username;
     private String password;
@@ -8,7 +8,7 @@ public class User {
     private String lastName;
 
     public User(String username, String password, String phoneNumber, String firstName, String lastName) {
-        this.username = username;
+        this.username = username;//this is the constructor for the user class
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
@@ -55,3 +55,4 @@ public class User {
         this.lastName = lastName;
     }
 }
+//ST10477400 Carla Smit
