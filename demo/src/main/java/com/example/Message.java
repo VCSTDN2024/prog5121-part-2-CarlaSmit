@@ -40,24 +40,32 @@ public class Message {
     }
     
     // Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
-    public int checkRecipientCell() {
-        if (recipient == null || recipient.length() > 10) {
-            return 0; // Invalid
-        }
-        
-        // Check if starts with + (international code)
-        if (!recipient.startsWith("+")) {
-            return 0; // Invalid
-        }
-        
-        // Check if the rest are digits
-        String numberPart = recipient.substring(1);
-        if (!numberPart.matches("\\d+")) {
-            return 0; // Invalid
-        }
-        
-        return 1; // Valid
+    // Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
+public int checkRecipientCell() {
+    if (recipient == null || recipient.isEmpty()) {
+        return 0; // Invalid
     }
+    
+    // Check if starts with + (international code)
+    if (!recipient.startsWith("+")) {
+        return 0; // Invalid
+    }
+    
+    // Get the number part (without the +)
+    String numberPart = recipient.substring(1);
+    
+    // Check if number part is too long (max 10 digits after +)
+    if (numberPart.length() > 10) {
+        return 0; // Invalid
+    }
+    
+    // Check if the number part contains only digits
+    if (!numberPart.matches("\\d+")) {
+        return 0; // Invalid
+    }
+    
+    return 1; // Valid
+}
     
     // Method: createMessageHash() - creates and returns the message hash
     public String createMessageHash() {
@@ -126,6 +134,10 @@ public class Message {
     public static int returnTotalMessages() {
         return totalMessagesSent;
     }
+    public static void resetCounters() {
+    totalMessagesSent = 0;
+    allMessages.clear();
+}
     
     // Method: storeMessage() - stores messages in JSON format
     public void storeMessage() {
@@ -174,5 +186,6 @@ public class Message {
     public String getMessageContent() {
          return messageContent; 
         }
-    
+    // Method: resetCounters() - resets static counters for testing
+
 }

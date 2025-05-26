@@ -11,169 +11,182 @@ public class Message {
     private String messageHash;
     private String recipient;
     private String messageContent;
-<span class="nc" id="L14">    private static int totalMessagesSent = 0;</span>
-<span class="nc" id="L15">    private static List&lt;Message&gt; allMessages = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L14">    private static int totalMessagesSent = 0;</span>
+<span class="fc" id="L15">    private static List&lt;Message&gt; allMessages = new ArrayList&lt;&gt;();</span>
     
     // Constructor
-<span class="nc" id="L18">    public Message(String recipient, String messageContent) {</span>
-<span class="nc" id="L19">        this.recipient = recipient;</span>
-<span class="nc" id="L20">        this.messageContent = messageContent;</span>
-<span class="nc" id="L21">        this.messageID = generateMessageID();</span>
-<span class="nc" id="L22">        this.messageHash = createMessageHash();</span>
-<span class="nc" id="L23">        totalMessagesSent++;</span>
-<span class="nc" id="L24">        allMessages.add(this);</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L18">    public Message(String recipient, String messageContent) {</span>
+<span class="fc" id="L19">        this.recipient = recipient;</span>
+<span class="fc" id="L20">        this.messageContent = messageContent;</span>
+<span class="fc" id="L21">        this.messageID = generateMessageID();</span>
+<span class="fc" id="L22">        this.messageHash = createMessageHash();</span>
+<span class="fc" id="L23">        totalMessagesSent++;</span>
+<span class="fc" id="L24">        allMessages.add(this);</span>
+<span class="fc" id="L25">    }</span>
     
     // Generate random 10-digit message ID
     private String generateMessageID() {
-<span class="nc" id="L29">        Random random = new Random();</span>
-<span class="nc" id="L30">        StringBuilder id = new StringBuilder();</span>
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (int i = 0; i &lt; 10; i++) {</span>
-<span class="nc" id="L32">            id.append(random.nextInt(10));</span>
+<span class="fc" id="L29">        Random random = new Random();</span>
+<span class="fc" id="L30">        StringBuilder id = new StringBuilder();</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (int i = 0; i &lt; 10; i++) {</span>
+<span class="fc" id="L32">            id.append(random.nextInt(10));</span>
         }
-<span class="nc" id="L34">        return id.toString();</span>
+<span class="fc" id="L34">        return id.toString();</span>
     }
     
     // Method: checkMessageID() - ensures message ID is not more than 10 characters
     public boolean checkMessageID() {
-<span class="nc bnc" id="L39" title="All 4 branches missed.">        return messageID != null &amp;&amp; messageID.length() &lt;= 10;</span>
+<span class="pc bpc" id="L39" title="2 of 4 branches missed.">        return messageID != null &amp;&amp; messageID.length() &lt;= 10;</span>
     }
     
     // Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
-    public int checkRecipientCell() {
-<span class="nc bnc" id="L44" title="All 4 branches missed.">        if (recipient == null || recipient.length() &gt; 10) {</span>
-<span class="nc" id="L45">            return 0; // Invalid</span>
-        }
-        
-        // Check if starts with + (international code)
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (!recipient.startsWith(&quot;+&quot;)) {</span>
-<span class="nc" id="L50">            return 0; // Invalid</span>
-        }
-        
-        // Check if the rest are digits
-<span class="nc" id="L54">        String numberPart = recipient.substring(1);</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!numberPart.matches(&quot;\\d+&quot;)) {</span>
-<span class="nc" id="L56">            return 0; // Invalid</span>
-        }
-        
-<span class="nc" id="L59">        return 1; // Valid</span>
+    // Method: checkRecipientCell() - ensures recipient cell number is no more than 10 characters and starts with international code
+public int checkRecipientCell() {
+<span class="pc bpc" id="L45" title="2 of 4 branches missed.">    if (recipient == null || recipient.isEmpty()) {</span>
+<span class="nc" id="L46">        return 0; // Invalid</span>
     }
+    
+    // Check if starts with + (international code)
+<span class="fc bfc" id="L50" title="All 2 branches covered.">    if (!recipient.startsWith(&quot;+&quot;)) {</span>
+<span class="fc" id="L51">        return 0; // Invalid</span>
+    }
+    
+    // Get the number part (without the +)
+<span class="fc" id="L55">    String numberPart = recipient.substring(1);</span>
+    
+    // Check if number part is too long (max 10 digits after +)
+<span class="fc bfc" id="L58" title="All 2 branches covered.">    if (numberPart.length() &gt; 10) {</span>
+<span class="fc" id="L59">        return 0; // Invalid</span>
+    }
+    
+    // Check if the number part contains only digits
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">    if (!numberPart.matches(&quot;\\d+&quot;)) {</span>
+<span class="nc" id="L64">        return 0; // Invalid</span>
+    }
+    
+<span class="fc" id="L67">    return 1; // Valid</span>
+}
     
     // Method: createMessageHash() - creates and returns the message hash
     public String createMessageHash() {
-<span class="nc bnc" id="L64" title="All 8 branches missed.">        if (messageID == null || messageID.length() &lt; 2 || messageContent == null || messageContent.trim().isEmpty()) {</span>
-<span class="nc" id="L65">            return &quot;00:0:INVALID&quot;;</span>
+<span class="pc bpc" id="L72" title="4 of 8 branches missed.">        if (messageID == null || messageID.length() &lt; 2 || messageContent == null || messageContent.trim().isEmpty()) {</span>
+<span class="nc" id="L73">            return &quot;00:0:INVALID&quot;;</span>
         }
         
-<span class="nc" id="L68">        String[] words = messageContent.trim().split(&quot;\\s+&quot;);</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">        String firstWord = words.length &gt; 0 ? words[0].toUpperCase() : &quot;&quot;;</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        String lastWord = words.length &gt; 1 ? words[words.length - 1].toUpperCase() : firstWord.toUpperCase();</span>
+<span class="fc" id="L76">        String[] words = messageContent.trim().split(&quot;\\s+&quot;);</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        String firstWord = words.length &gt; 0 ? words[0].toUpperCase() : &quot;&quot;;</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        String lastWord = words.length &gt; 1 ? words[words.length - 1].toUpperCase() : firstWord.toUpperCase();</span>
         
-<span class="nc" id="L72">        String firstTwoDigits = messageID.substring(0, 2);</span>
-<span class="nc" id="L73">        int messageLength = messageContent.length();</span>
+<span class="fc" id="L80">        String firstTwoDigits = messageID.substring(0, 2);</span>
+<span class="fc" id="L81">        int messageLength = messageContent.length();</span>
         
-<span class="nc" id="L75">        return firstTwoDigits + &quot;:&quot; + messageLength + &quot;:&quot; + firstWord + lastWord;</span>
+<span class="fc" id="L83">        return firstTwoDigits + &quot;:&quot; + messageLength + &quot;:&quot; + firstWord + lastWord;</span>
     }
     
     // Method: SentMessage() - allows user to choose send, store, or disregard
     public String SentMessage() {
-<span class="nc" id="L80">        String[] options = {&quot;Send Message&quot;, &quot;Disregard Message&quot;, &quot;Store Message&quot;};</span>
-<span class="nc" id="L81">        int choice = JOptionPane.showOptionDialog(</span>
-            null,
-            &quot;What would you like to do with this message?&quot;,
-            &quot;Message Options&quot;,
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[0]
+<span class="nc" id="L88">        String[] options = {&quot;Send Message&quot;, &quot;Disregard Message&quot;, &quot;Store Message&quot;};</span>
+<span class="nc" id="L89">        int choice = JOptionPane.showOptionDialog(</span>
+<span class="nc" id="L90">            null,</span>
+<span class="nc" id="L91">            &quot;What would you like to do with this message?&quot;,</span>
+<span class="nc" id="L92">            &quot;Message Options&quot;,</span>
+<span class="nc" id="L93">            JOptionPane.DEFAULT_OPTION,</span>
+<span class="nc" id="L94">            JOptionPane.QUESTION_MESSAGE,</span>
+<span class="nc" id="L95">            null,</span>
+<span class="nc" id="L96">            options,</span>
+<span class="nc" id="L97">            options[0]</span>
         );
         
-<span class="nc bnc" id="L92" title="All 4 branches missed.">        switch (choice) {</span>
+<span class="nc bnc" id="L100" title="All 4 branches missed.">        switch (choice) {</span>
             case 0:
-<span class="nc" id="L94">                return &quot;Message successfully sent.&quot;;</span>
+<span class="nc" id="L102">                return &quot;Message successfully sent.&quot;;</span>
             case 1:
-<span class="nc" id="L96">                return &quot;Press 0 to delete message.&quot;;</span>
+<span class="nc" id="L104">                return &quot;Press 0 to delete message.&quot;;</span>
             case 2:
-<span class="nc" id="L98">                storeMessage();</span>
-<span class="nc" id="L99">                return &quot;Message successfully stored.&quot;;</span>
+<span class="nc" id="L106">                storeMessage();</span>
+<span class="nc" id="L107">                return &quot;Message successfully stored.&quot;;</span>
             default:
-<span class="nc" id="L101">                return &quot;Message successfully sent.&quot;;</span>
+<span class="nc" id="L109">                return &quot;Message successfully sent.&quot;;</span>
         }
     }
     
     // Method: printMessages() - returns list of all messages sent
     public static String printMessages() {
-<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (allMessages.isEmpty()) {</span>
-<span class="nc" id="L108">            return &quot;No messages have been sent.&quot;;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (allMessages.isEmpty()) {</span>
+<span class="nc" id="L116">            return &quot;No messages have been sent.&quot;;</span>
         }
         
-<span class="nc" id="L111">        StringBuilder result = new StringBuilder();</span>
-<span class="nc" id="L112">        result.append(&quot;=== All Messages Sent ===\n&quot;);</span>
-<span class="nc bnc" id="L113" title="All 2 branches missed.">        for (int i = 0; i &lt; allMessages.size(); i++) {</span>
-<span class="nc" id="L114">            Message msg = allMessages.get(i);</span>
-<span class="nc" id="L115">            result.append(&quot;Message &quot;).append(i + 1).append(&quot;:\n&quot;);</span>
-<span class="nc" id="L116">            result.append(&quot;Message ID: &quot;).append(msg.messageID).append(&quot;\n&quot;);</span>
-<span class="nc" id="L117">            result.append(&quot;Message Hash: &quot;).append(msg.messageHash).append(&quot;\n&quot;);</span>
-<span class="nc" id="L118">            result.append(&quot;Recipient: &quot;).append(msg.recipient).append(&quot;\n&quot;);</span>
-<span class="nc" id="L119">            result.append(&quot;Message: &quot;).append(msg.messageContent).append(&quot;\n&quot;);</span>
-<span class="nc" id="L120">            result.append(&quot;---\n&quot;);</span>
+<span class="fc" id="L119">        StringBuilder result = new StringBuilder();</span>
+<span class="fc" id="L120">        result.append(&quot;=== All Messages Sent ===\n&quot;);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        for (int i = 0; i &lt; allMessages.size(); i++) {</span>
+<span class="fc" id="L122">            Message msg = allMessages.get(i);</span>
+<span class="fc" id="L123">            result.append(&quot;Message &quot;).append(i + 1).append(&quot;:\n&quot;);</span>
+<span class="fc" id="L124">            result.append(&quot;Message ID: &quot;).append(msg.messageID).append(&quot;\n&quot;);</span>
+<span class="fc" id="L125">            result.append(&quot;Message Hash: &quot;).append(msg.messageHash).append(&quot;\n&quot;);</span>
+<span class="fc" id="L126">            result.append(&quot;Recipient: &quot;).append(msg.recipient).append(&quot;\n&quot;);</span>
+<span class="fc" id="L127">            result.append(&quot;Message: &quot;).append(msg.messageContent).append(&quot;\n&quot;);</span>
+<span class="fc" id="L128">            result.append(&quot;---\n&quot;);</span>
         }
-<span class="nc" id="L122">        return result.toString();</span>
+<span class="fc" id="L130">        return result.toString();</span>
     }
     
     // Method: returnTotalMessages() - returns total number of messages sent
     public static int returnTotalMessages() {
-<span class="nc" id="L127">        return totalMessagesSent;</span>
+<span class="fc" id="L135">        return totalMessagesSent;</span>
     }
+    public static void resetCounters() {
+<span class="fc" id="L138">    totalMessagesSent = 0;</span>
+<span class="fc" id="L139">    allMessages.clear();</span>
+<span class="fc" id="L140">}</span>
     
     // Method: storeMessage() - stores messages in JSON format
     public void storeMessage() {
         try {
-<span class="nc" id="L133">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
-<span class="nc" id="L134">            String timestamp = sdf.format(new Date());</span>
+<span class="fc" id="L145">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L146">            String timestamp = sdf.format(new Date());</span>
             
             // Create JSON string manually
-<span class="nc" id="L137">            StringBuilder json = new StringBuilder();</span>
-<span class="nc" id="L138">            json.append(&quot;{\n&quot;);</span>
-<span class="nc" id="L139">            json.append(&quot;  \&quot;messageID\&quot;: \&quot;&quot;).append(escapeJson(this.messageID)).append(&quot;\&quot;,\n&quot;);</span>
-<span class="nc" id="L140">            json.append(&quot;  \&quot;messageHash\&quot;: \&quot;&quot;).append(escapeJson(this.messageHash)).append(&quot;\&quot;,\n&quot;);</span>
-<span class="nc" id="L141">            json.append(&quot;  \&quot;recipient\&quot;: \&quot;&quot;).append(escapeJson(this.recipient)).append(&quot;\&quot;,\n&quot;);</span>
-<span class="nc" id="L142">            json.append(&quot;  \&quot;messageContent\&quot;: \&quot;&quot;).append(escapeJson(this.messageContent)).append(&quot;\&quot;,\n&quot;);</span>
-<span class="nc" id="L143">            json.append(&quot;  \&quot;timestamp\&quot;: \&quot;&quot;).append(timestamp).append(&quot;\&quot;\n&quot;);</span>
-<span class="nc" id="L144">            json.append(&quot;}\n&quot;);</span>
+<span class="fc" id="L149">            StringBuilder json = new StringBuilder();</span>
+<span class="fc" id="L150">            json.append(&quot;{\n&quot;);</span>
+<span class="fc" id="L151">            json.append(&quot;  \&quot;messageID\&quot;: \&quot;&quot;).append(escapeJson(this.messageID)).append(&quot;\&quot;,\n&quot;);</span>
+<span class="fc" id="L152">            json.append(&quot;  \&quot;messageHash\&quot;: \&quot;&quot;).append(escapeJson(this.messageHash)).append(&quot;\&quot;,\n&quot;);</span>
+<span class="fc" id="L153">            json.append(&quot;  \&quot;recipient\&quot;: \&quot;&quot;).append(escapeJson(this.recipient)).append(&quot;\&quot;,\n&quot;);</span>
+<span class="fc" id="L154">            json.append(&quot;  \&quot;messageContent\&quot;: \&quot;&quot;).append(escapeJson(this.messageContent)).append(&quot;\&quot;,\n&quot;);</span>
+<span class="fc" id="L155">            json.append(&quot;  \&quot;timestamp\&quot;: \&quot;&quot;).append(timestamp).append(&quot;\&quot;\n&quot;);</span>
+<span class="fc" id="L156">            json.append(&quot;}\n&quot;);</span>
             
-<span class="nc" id="L146">            FileWriter writer = new FileWriter(&quot;stored_messages.json&quot;, true);</span>
-<span class="nc" id="L147">            writer.write(json.toString());</span>
-<span class="nc" id="L148">            writer.close();</span>
+<span class="fc" id="L158">            FileWriter writer = new FileWriter(&quot;stored_messages.json&quot;, true);</span>
+<span class="fc" id="L159">            writer.write(json.toString());</span>
+<span class="fc" id="L160">            writer.close();</span>
             
-<span class="nc" id="L150">            System.out.println(&quot;Message stored successfully in JSON format.&quot;);</span>
-<span class="nc" id="L151">        } catch (IOException e) {</span>
-<span class="nc" id="L152">            System.err.println(&quot;Error storing message: &quot; + e.getMessage());</span>
-<span class="nc" id="L153">        }</span>
-<span class="nc" id="L154">    }</span>
+<span class="fc" id="L162">            System.out.println(&quot;Message stored successfully in JSON format.&quot;);</span>
+<span class="pc" id="L163">        } catch (IOException e) {</span>
+<span class="nc" id="L164">            System.err.println(&quot;Error storing message: &quot; + e.getMessage());</span>
+        }
+<span class="fc" id="L166">    }</span>
     
     // Helper method to escape JSON strings
     private String escapeJson(String input) {
-<span class="nc bnc" id="L158" title="All 2 branches missed.">        if (input == null) return &quot;&quot;;</span>
-<span class="nc" id="L159">        return input.replace(&quot;\\&quot;, &quot;\\\\&quot;)</span>
-<span class="nc" id="L160">                   .replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;)</span>
-<span class="nc" id="L161">                   .replace(&quot;\n&quot;, &quot;\\n&quot;)</span>
-<span class="nc" id="L162">                   .replace(&quot;\r&quot;, &quot;\\r&quot;)</span>
-<span class="nc" id="L163">                   .replace(&quot;\t&quot;, &quot;\\t&quot;);</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">        if (input == null) return &quot;&quot;;</span>
+<span class="fc" id="L171">        return input.replace(&quot;\\&quot;, &quot;\\\\&quot;)</span>
+<span class="fc" id="L172">                   .replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;)</span>
+<span class="fc" id="L173">                   .replace(&quot;\n&quot;, &quot;\\n&quot;)</span>
+<span class="fc" id="L174">                   .replace(&quot;\r&quot;, &quot;\\r&quot;)</span>
+<span class="fc" id="L175">                   .replace(&quot;\t&quot;, &quot;\\t&quot;);</span>
     }
     public String getMessageID() { 
-<span class="nc" id="L166">        return messageID; </span>
+<span class="fc" id="L178">        return messageID; </span>
     }
     public String getMessageHash() {
-<span class="nc" id="L169">         return messageHash; </span>
+<span class="nc" id="L181">         return messageHash; </span>
         }
     public String getRecipient() {
-<span class="nc" id="L172">         return recipient; </span>
+<span class="fc" id="L184">         return recipient; </span>
         }
     public String getMessageContent() {
-<span class="nc" id="L175">         return messageContent; </span>
+<span class="fc" id="L187">         return messageContent; </span>
         }
-    
+    // Method: resetCounters() - resets static counters for testing
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -2,14 +2,20 @@ package com.example;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class QuickChatApp {
     private static Scanner scanner = new Scanner(System.in);
     private static String currentUser;
     private static int maxMessages;
     
+    
     public static void main(String[] args) {
+        // Add this to the main method at the very beginning
+    System.setProperty("java.awt.headless", "false");
+
         System.out.println("=== QuickChat Application ===");
-        
+        testGUI();
         // Step 1: User login
         if (!login()) {
             System.out.println("Login failed. Exiting application.");
@@ -178,6 +184,9 @@ public class QuickChatApp {
         System.out.print("Press Enter to continue...");
         scanner.nextLine();
     }
+    public static void testGUI() {
+    JOptionPane.showMessageDialog(null, "GUI Test - Can you see this?");
+}
 }
 
 

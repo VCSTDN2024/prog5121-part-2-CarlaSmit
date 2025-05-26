@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="LoginSysIntegrationTest" time="0.049" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MessageJUnitTests" time="0.038" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,8 +58,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testEdgeCasePasswords" classname="LoginSysIntegrationTest" time="0.032"/>
-  <testcase name="testEdgeCaseUsernames" classname="LoginSysIntegrationTest" time="0"/>
-  <testcase name="testFullRegistrationAndLoginFlow" classname="LoginSysIntegrationTest" time="0.001"/>
-  <testcase name="testEdgeCasePhoneNumbers" classname="LoginSysIntegrationTest" time="0.001"/>
+  <testcase name="testRecipientValidation" classname="MessageJUnitTests" time="0.014"/>
+  <testcase name="testAssignmentTestData" classname="MessageJUnitTests" time="0.002"/>
+  <testcase name="testJSONStorage" classname="MessageJUnitTests" time="0.006"/>
+  <testcase name="testMessageLengthValidation" classname="MessageJUnitTests" time="0.001"/>
+  <testcase name="testMessageCounter" classname="MessageJUnitTests" time="0.001"/>
+  <testcase name="testMessageHashCreation" classname="MessageJUnitTests" time="0.005"/>
+  <testcase name="testMessageIDCreation" classname="MessageJUnitTests" time="0.002"/>
+  <testcase name="testPrintMessages" classname="MessageJUnitTests" time="0.001"/>
 </testsuite>
