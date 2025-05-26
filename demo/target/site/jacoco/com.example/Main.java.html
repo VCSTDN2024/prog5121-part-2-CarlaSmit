@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package com.example;
+//main just for tesdting purposes
+//im using QuickChatApp.java as the main class to run the application
+//ST10477400 Carla Smit
+import java.util.Scanner;
+
+<span class="nc" id="L7">public class Main {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L9">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L10">        LoginSys loginSys = new LoginSys();</span>
+
+<span class="nc" id="L12">        System.out.println(&quot;=== Registration ===&quot;);</span>
+<span class="nc" id="L13">        System.out.print(&quot;Enter first name: &quot;);</span>
+<span class="nc" id="L14">        String firstName = scanner.nextLine();</span>
+
+<span class="nc" id="L16">        System.out.print(&quot;Enter last name: &quot;);</span>
+<span class="nc" id="L17">        String lastName = scanner.nextLine();</span>
+
+<span class="nc" id="L19">        System.out.print(&quot;Enter username: &quot;);</span>
+<span class="nc" id="L20">        String username = scanner.nextLine();</span>
+
+<span class="nc" id="L22">        System.out.print(&quot;Enter password: &quot;);</span>
+<span class="nc" id="L23">        String password = scanner.nextLine();</span>
+
+<span class="nc" id="L25">        System.out.print(&quot;Enter cell phone number with international code (e.g., +1234567890): &quot;);</span>
+<span class="nc" id="L26">        String phoneNumber = scanner.nextLine();</span>
+
+<span class="nc" id="L28">        String registrationResult = loginSys.registerUser(username, password, phoneNumber, firstName, lastName);</span>
+<span class="nc" id="L29">        System.out.println(registrationResult);</span>
+
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (registrationResult.equals(&quot;The two above conditions have been met, and the user has been registered successfully.&quot;)) {</span>
+<span class="nc" id="L32">            System.out.println(&quot;\n=== Login ===&quot;);</span>
+<span class="nc" id="L33">            System.out.print(&quot;Enter username: &quot;);</span>
+<span class="nc" id="L34">            String loginUsername = scanner.nextLine();</span>
+
+<span class="nc" id="L36">            System.out.print(&quot;Enter password: &quot;);</span>
+<span class="nc" id="L37">            String loginPassword = scanner.nextLine();</span>
+
+<span class="nc" id="L39">            boolean loginSuccess = loginSys.loginUser(loginUsername, loginPassword);</span>
+<span class="nc" id="L40">            String loginMessage = loginSys.returnLoginStatus(loginSuccess);</span>
+<span class="nc" id="L41">            System.out.println(loginMessage);</span>
+        }
+
+<span class="nc" id="L44">        scanner.close();</span>
+<span class="nc" id="L45">    }</span>
+    //ST10477400 Carla Smit
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
