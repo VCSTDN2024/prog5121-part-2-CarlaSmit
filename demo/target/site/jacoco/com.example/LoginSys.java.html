@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginSys.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">LoginSys.java</span></div><h1>LoginSys.java</h1><pre class="source lang-java linenums">package com.example;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class LoginSys {
+    private List&lt;User&gt; users;
+
+<span class="fc" id="L11">    public LoginSys() {</span>
+<span class="fc" id="L12">        users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L13">    }</span>
+
+    public boolean checkUserName(String username) {
+<span class="fc bfc" id="L16" title="All 4 branches covered.">        return username.contains(&quot;_&quot;) &amp;&amp; username.length() &lt;= 5;</span>
+    }
+
+    public boolean checkPasswordComplexity(String password) {
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (password.length() &lt; 8) {</span>
+<span class="fc" id="L21">            return false;</span>
+        }
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (!Pattern.compile(&quot;[A-Z]&quot;).matcher(password).find()) {</span>
+<span class="fc" id="L24">            return false;</span>
+        }
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (!Pattern.compile(&quot;[0-9]&quot;).matcher(password).find()) {</span>
+<span class="fc" id="L27">            return false;</span>
+        }
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (!Pattern.compile(&quot;[^a-zA-Z0-9]&quot;).matcher(password).find()) {</span>
+<span class="fc" id="L30">            return false;</span>
+        }
+<span class="fc" id="L32">        return true;</span>
+    }
+
+    public boolean checkCellPhoneNumber(String phoneNumber) {
+<span class="fc" id="L36">        String regex = &quot;^\\+\\d{1,3}\\d{7,10}$&quot;;</span>
+<span class="fc" id="L37">        Pattern pattern = Pattern.compile(regex);</span>
+<span class="fc" id="L38">        Matcher matcher = pattern.matcher(phoneNumber);</span>
+<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        return matcher.matches() &amp;&amp; phoneNumber.length() &lt;= 13;</span>
+    }
+
+    public String registerUser(String username, String password, String phoneNumber, String firstName, String lastName) {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (!checkUserName(username)) {</span>
+<span class="fc" id="L44">            return &quot;The username is incorrectly formatted.&quot;;</span>
+        }
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (!checkPasswordComplexity(password)) {</span>
+<span class="fc" id="L47">            return &quot;The password does not meet the complexity requirements.&quot;;</span>
+        }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (!checkCellPhoneNumber(phoneNumber)) {</span>
+<span class="fc" id="L50">            return &quot;The cell phone number is incorrectly formatted or does not contain international code.&quot;;</span>
+        }
+<span class="fc" id="L52">        User newUser = new User(username, password, phoneNumber, firstName, lastName);</span>
+<span class="fc" id="L53">        users.add(newUser);</span>
+<span class="fc" id="L54">        return &quot;The two above conditions have been met, and the user has been registered successfully.&quot;;</span>
+    }
+
+    public boolean loginUser(String username, String password) {
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (User user : users) {</span>
+<span class="fc bfc" id="L59" title="All 4 branches covered.">            if (user.getUsername().equals(username) &amp;&amp; user.getPassword().equals(password)) {</span>
+<span class="fc" id="L60">                return true;</span>
+            }
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">        return false;</span>
+    }
+
+    public String returnLoginStatus(boolean loginSuccess) {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (loginSuccess) {</span>
+<span class="fc" id="L68">            return &quot;A successful login&quot;;</span>
+        } else {
+<span class="fc" id="L70">            return &quot;A failed login&quot;;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
