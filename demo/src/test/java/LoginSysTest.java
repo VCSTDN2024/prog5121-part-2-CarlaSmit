@@ -94,4 +94,36 @@ public class LoginSysTest {
         loginSys.registerUser("user_", "Password1!", "+12345678901", "John", "Doe");
         assertFalse(loginSys.loginUser("user_", ""));
     }
+
+    // Tests based on provided table
+
+    @Test
+    public void testUsernameIncorrectlyFormatted_ReturnsFalse() {
+        boolean result = loginSys.checkUserName("user"); // No underscore
+        assertEquals(false, result); // The system returns: False
+    }
+
+    @Test
+    public void testPasswordMeetsComplexityRequirements_ReturnsTrue() {
+        boolean result = loginSys.checkPasswordComplexity("Password1!");
+        assertEquals(true, result); // The system returns: True
+    }
+
+    @Test
+    public void testPasswordDoesNotMeetComplexityRequirements_ReturnsFalse() {
+        boolean result = loginSys.checkPasswordComplexity("password");
+        assertEquals(false, result); // The system returns: False
+    }
+
+    @Test
+    public void testCellPhoneNumberCorrectlyFormatted_ReturnsTrue() {
+        boolean result = loginSys.checkCellPhoneNumber("+12345678901");
+        assertEquals(true, result); // The system returns: True
+    }
+
+    @Test
+    public void testCellPhoneNumberIncorrectlyFormatted_ReturnsFalse() {
+        boolean result = loginSys.checkCellPhoneNumber("1234567890"); // Missing '+'
+        assertEquals(false, result); // The system returns: False
+    }
 }
